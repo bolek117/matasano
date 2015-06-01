@@ -3,7 +3,6 @@ __author__ = 'mwitas'
 import argparse
 import base64
 
-debug = True
 
 choice_hex = 'hex'
 choice_base64 = 'base64'
@@ -12,6 +11,7 @@ choices = [choice_hex, choice_base64]
 
 def parse_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--verbose", help="Be verbose", action="store_true")
     parser.add_argument("input_format", choices=choices, help="Format of input data")
     parser.add_argument("output_format", choices=choices, help="Desired format of output data")
     parser.add_argument("input_data", help="Data to convert")
@@ -19,7 +19,7 @@ def parse_args():
 
 
 def not_implemented_yet(input, output):
-    print '[{0} -> {1}] Not implemented yet'.format(input, output)
+    print '[{} -> {}] Not implemented yet'.format(input, output)
 
 
 def hex2base64(data):
@@ -36,9 +36,10 @@ def main():
     input_data = args.input_data
     input_format = args.input_format
     output_format = args.output_format
+    debug = args.verbose
 
     if debug:
-        print("Input data: {0}\nInput format: {1}\nOutput format: {2}".format(input_data, input_format, output_format))
+        print("Input data: {}\nInput format: {}\nOutput format: {}".format(input_data, input_format, output_format))
 
     if input_format == choice_hex:
         if output_format == choice_base64:
